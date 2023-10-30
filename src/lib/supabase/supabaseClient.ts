@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from './__database.types__';
+import { PUBLIC_SUPABASE_INSTANCE_URL, PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 
-import { SUPABASE_INSTANCE_URL, SUPABASE_ANON_KEY } from '$env/static/private';
-
-export const supabase = createClient<Database>(SUPABASE_INSTANCE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient<Database>(
+	PUBLIC_SUPABASE_INSTANCE_URL,
+	PUBLIC_SUPABASE_ANON_KEY
+);

@@ -9,7 +9,14 @@ export type Price = Database['public']['Tables']['price_list']['Row'];
 export type Order = Database['public']['Tables']['orders']['Row'];
 export type OrderLine = Database['public']['Tables']['order_lines']['Row'];
 
-/// Pre Cart Types
+/// Pre Submit Cart Types
+export interface Basket {
+	customer_name?: string;
+	lines: OrderLineData[];
+	allergies?: string;
+	notes?: string;
+}
+
 export interface OrderLineData {
 	line_total: number;
 	pizza_size_id: string;
