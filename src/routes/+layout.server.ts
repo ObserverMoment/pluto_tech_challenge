@@ -1,5 +1,6 @@
 import { supabase } from '$lib/supabase/supabaseClient';
 
+/// Getting global read only app data as it is required across multiple routes.
 export async function load() {
 	const [{ data: pizza_toppings }, { data: pizza_sizes }, { data: price_list }] = await Promise.all(
 		[

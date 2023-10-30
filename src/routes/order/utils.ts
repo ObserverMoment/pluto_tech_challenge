@@ -1,4 +1,5 @@
 import type { OrderLineData, PizzaSize, PizzaTopping } from '$lib/supabase/types_extended';
+import { roundToDecimalPlaces } from '$lib/utils';
 import type { SelectedToppings } from '../../components/topping_selector/types';
 
 interface ConvertSelectionToLineOrderProps {
@@ -24,6 +25,13 @@ export const convertSelectionToOrderData = ({
 				const toppingName = allToppings.find((t) => t.id === parseInt(toppingId))!.name;
 				acum[toppingName] = quantity;
 				return acum;
-			}, {} as Record<string, string>)
+			}, {} as Record<string, number>)
 	};
+};
+
+export const calculateOrderTotal = (orderLines: OrderLineData[]) => {
+	return roundToDecimalPlaces(
+		orderLines.reduce((acum, next) => acum + next.line_total, 0),
+		2
+	);
 };

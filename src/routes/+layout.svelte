@@ -1,7 +1,19 @@
-<script>
+<script lang="ts">
 	import Header from '../components/Header.svelte';
 	import './styles.css';
-	import "../app.css";
+	import '../app.css';
+	import { setContext } from 'svelte';
+	import { writable } from 'svelte/store';
+	import type { BasketData, GlobalAppData } from '$lib/supabase/types_extended';
+	import { BASKET_DATA_CONTEXT_NAME, GLOBAL_APP_DATA_CONTEXT_NAME } from '../constants';
+
+	export let data;
+	// Create a store for the global DATA
+	setContext(GLOBAL_APP_DATA_CONTEXT_NAME, data);
+
+	// Create a store for the basket state
+	const basket = writable<BasketData>({ order_lines: [] });
+	setContext(BASKET_DATA_CONTEXT_NAME, basket);
 </script>
 
 <div class="app">

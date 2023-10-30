@@ -6,11 +6,16 @@
 	import type { PizzaSizeOption } from '../../components/pizza_size_selector/types';
 	import type { SelectedToppings } from '../../components/topping_selector/types';
 	import { convertSelectionToOrderData } from './utils';
+	import { getContext } from 'svelte';
+	import type { Writable } from 'svelte/store';
+	import type { BasketData, GlobalAppData } from '$lib/supabase/types_extended';
+	import { BASKET_DATA_CONTEXT_NAME, GLOBAL_APP_DATA_CONTEXT_NAME } from '../../constants';
 
-	export let data;
-	let { pizza_sizes, pizza_toppings, price_list } = data;
+	const basketData = getContext<Writable<BasketData>>(BASKET_DATA_CONTEXT_NAME);
+	const globalAppData = getContext<GlobalAppData>(GLOBAL_APP_DATA_CONTEXT_NAME);
+	const { pizza_sizes, pizza_toppings, price_list } = globalAppData;
 
-	let selectedSizeId = pizza_sizes.find((p) => p.name === 'medium_pizza')!.id;
+	$: selectedSizeId = pizza_sizes.find((p) => p.name === 'medium_pizza')!.id;
 	$: selectedPizzaSize = pizza_sizes.find((p) => p.id === selectedSizeId)!;
 	$: includedFreeToppings = selectedPizzaSize.included_toppings;
 
@@ -45,7 +50,7 @@
 			selectedToppings: selectedToppings,
 			allToppings: pizza_toppings
 		});
-		console.log(orderLine);
+		basketData.set({ customer_name: 'test', order_lines: [...$basketData.order_lines, orderLine] });
 	}
 </script>
 
