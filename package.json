@@ -15,10 +15,12 @@
 	},
 	"devDependencies": {
 		"@fontsource/fira-mono": "^4.5.10",
+		"@iconify/json": "^2.2.135",
 		"@neoconfetti/svelte": "^1.0.0",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.20.4",
+		"@sveltejs/vite-plugin-svelte": "^2.4.6",
 		"@types/cookie": "^0.5.1",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
@@ -34,11 +36,13 @@
 		"tailwindcss": "^3.3.5",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
+		"unplugin-icons": "^0.17.1",
 		"vite": "^4.4.2",
 		"vitest": "^0.32.2"
 	},
 	"type": "module",
 	"dependencies": {
-		"@supabase/supabase-js": "^2.38.4"
+		"@supabase/supabase-js": "^2.38.4",
+		"clsx": "^2.0.0"
 	}
 }

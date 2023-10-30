@@ -9,55 +9,30 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      carts: {
-        Row: {
-          created_at: string
-          id: string
-          order_id: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          order_id?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          order_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "carts_order_id_fkey"
-            columns: ["order_id"]
-            referencedRelation: "orders"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       order_lines: {
         Row: {
           created_at: string
           id: number
           line_total: number
           order_id: string
-          product_id: number
-          quantity: number
+          pizza_size_id: string
+          toppings: Json
         }
         Insert: {
           created_at?: string
           id?: number
           line_total: number
           order_id: string
-          product_id: number
-          quantity: number
+          pizza_size_id: string
+          toppings?: Json
         }
         Update: {
           created_at?: string
           id?: number
           line_total?: number
           order_id?: string
-          product_id?: number
-          quantity?: number
+          pizza_size_id?: string
+          toppings?: Json
         }
         Relationships: [
           {
@@ -67,9 +42,9 @@ export interface Database {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "order_lines_product_id_fkey"
-            columns: ["product_id"]
-            referencedRelation: "pizza_options"
+            foreignKeyName: "order_lines_pizza_size_id_fkey"
+            columns: ["pizza_size_id"]
+            referencedRelation: "pizza_sizes"
             referencedColumns: ["id"]
           }
         ]
@@ -98,27 +73,24 @@ export interface Database {
         }
         Relationships: []
       }
-      pizza_options: {
+      pizza_sizes: {
         Row: {
           created_at: string
-          id: number
+          id: string
           included_toppings: number
           name: string
-          price: number
         }
         Insert: {
           created_at?: string
-          id?: number
+          id?: string
           included_toppings: number
           name: string
-          price: number
         }
         Update: {
           created_at?: string
-          id?: number
+          id?: string
           included_toppings?: number
           name?: string
-          price?: number
         }
         Relationships: []
       }
@@ -137,6 +109,27 @@ export interface Database {
           created_at?: string
           id?: number
           name?: string
+        }
+        Relationships: []
+      }
+      price_list: {
+        Row: {
+          created_at: string
+          id: number
+          name: string
+          price: number
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          name: string
+          price: number
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          name?: string
+          price?: number
         }
         Relationships: []
       }

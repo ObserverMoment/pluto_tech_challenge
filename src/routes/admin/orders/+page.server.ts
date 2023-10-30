@@ -1,9 +1,9 @@
 import { supabase } from '$lib/supabase/supabaseClient';
 
 export async function load() {
-	const { data } = await supabase.from('pizza_toppings').select();
+	const { data } = await supabase.from('orders').select();
 	console.log(data);
 	return {
-		pizza_topppings: data ?? []
+		orders: data ?? []
 	};
 }
